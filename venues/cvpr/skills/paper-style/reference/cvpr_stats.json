@@ -1,0 +1,296 @@
+{
+  "n_papers": 106,
+  "fields": {
+    "abstract.sentences": {
+      "quantiles": {
+        "median": 8,
+        "p25": 7,
+        "p75": 9,
+        "n": 106
+      },
+      "per_domain_median": {
+        "segdet": 8.0,
+        "video": 8.0,
+        "VL": 9,
+        "3D": 7.5,
+        "other": 7.0,
+        "generation": 8.0
+      },
+      "domain_sensitive": false
+    },
+    "abstract.words": {
+      "quantiles": {
+        "median": 169,
+        "p25": 148,
+        "p75": 194,
+        "n": 106
+      },
+      "per_domain_median": {
+        "segdet": 167.0,
+        "video": 171.5,
+        "VL": 192,
+        "3D": 160.0,
+        "other": 174.0,
+        "generation": 171.5
+      },
+      "domain_sensitive": false
+    },
+    "intro.paragraphs": {
+      "quantiles": {
+        "median": 8,
+        "p25": 7,
+        "p75": 11,
+        "n": 106
+      },
+      "per_domain_median": {
+        "segdet": 11.0,
+        "video": 7.5,
+        "VL": 8,
+        "3D": 7.0,
+        "other": 9.0,
+        "generation": 9.5
+      },
+      "domain_sensitive": false
+    },
+    "related.words": {
+      "quantiles": {
+        "median": 393,
+        "p25": 333,
+        "p75": 497,
+        "n": 102
+      },
+      "per_domain_median": {
+        "segdet": 483,
+        "video": 459.5,
+        "VL": 358,
+        "3D": 437.0,
+        "other": 384.0,
+        "generation": 351
+      },
+      "domain_sensitive": false
+    },
+    "method.equation_count": {
+      "quantiles": {
+        "median": 11,
+        "p25": 6,
+        "p75": 16,
+        "n": 97
+      },
+      "per_domain_median": {
+        "segdet": 18.0,
+        "video": 10,
+        "3D": 10.0,
+        "VL": 7.5,
+        "other": 15.0,
+        "generation": 6.5
+      },
+      "domain_sensitive": true
+    },
+    "method.figure_count": {
+      "quantiles": {
+        "median": 2,
+        "p25": 1,
+        "p75": 3,
+        "n": 97
+      },
+      "per_domain_median": {
+        "segdet": 1.5,
+        "video": 1,
+        "3D": 2.0,
+        "VL": 1.5,
+        "other": 1.0,
+        "generation": 1.0
+      },
+      "domain_sensitive": false
+    },
+    "experiments.table_count": {
+      "quantiles": {
+        "median": 4,
+        "p25": 2,
+        "p75": 7,
+        "n": 106
+      },
+      "per_domain_median": {
+        "segdet": 6.0,
+        "video": 3.5,
+        "VL": 6,
+        "3D": 3.0,
+        "other": 3.5,
+        "generation": 2.5
+      },
+      "domain_sensitive": false
+    },
+    "experiments.ablation_mentions": {
+      "quantiles": {
+        "median": 7,
+        "p25": 2,
+        "p75": 11,
+        "n": 106
+      },
+      "per_domain_median": {
+        "segdet": 3.5,
+        "video": 7.5,
+        "VL": 6,
+        "3D": 8.5,
+        "other": 3.5,
+        "generation": 5.5
+      },
+      "domain_sensitive": false
+    },
+    "experiments.sota_mentions": {
+      "quantiles": {
+        "median": 10,
+        "p25": 7,
+        "p75": 17,
+        "n": 106
+      },
+      "per_domain_median": {
+        "segdet": 7.0,
+        "video": 8.5,
+        "VL": 9,
+        "3D": 12.0,
+        "other": 9.0,
+        "generation": 13.5
+      },
+      "domain_sensitive": false
+    },
+    "claims.body_words": {
+      "quantiles": {
+        "median": 5282,
+        "p25": 4246,
+        "p75": 6445,
+        "n": 106
+      },
+      "per_domain_median": {
+        "segdet": 4714.0,
+        "video": 4973.5,
+        "VL": 5425,
+        "3D": 5305.0,
+        "other": 5440.0,
+        "generation": 5287.5
+      },
+      "domain_sensitive": false
+    },
+    "citations.total": {
+      "quantiles": {
+        "median": 77,
+        "p25": 56,
+        "p75": 98,
+        "n": 106
+      },
+      "per_domain_median": {
+        "segdet": 64.5,
+        "video": 66.5,
+        "VL": 64,
+        "3D": 84.0,
+        "other": 63.0,
+        "generation": 89.5
+      },
+      "domain_sensitive": false
+    },
+    "intro.hook_type": {
+      "distribution": {
+        "claim": [
+          104,
+          98.1
+        ],
+        "statistic": [
+          2,
+          1.9
+        ]
+      }
+    },
+    "abstract.opening_verb": {
+      "distribution": {
+        "introduce": [
+          37,
+          34.9
+        ],
+        "propose": [
+          24,
+          22.6
+        ],
+        "present": [
+          22,
+          20.8
+        ],
+        "null": [
+          11,
+          10.4
+        ],
+        "address": [
+          5,
+          4.7
+        ],
+        "show": [
+          2,
+          1.9
+        ],
+        "build": [
+          1,
+          0.9
+        ],
+        "demonstrate": [
+          1,
+          0.9
+        ],
+        "design": [
+          1,
+          0.9
+        ],
+        "develop": [
+          1,
+          0.9
+        ],
+        "tackle": [
+          1,
+          0.9
+        ]
+      }
+    },
+    "structure.has_ablation_heading": {
+      "true": 70,
+      "false": 36,
+      "rate_true": 66.0,
+      "n": 106
+    },
+    "structure.has_related": {
+      "true": 102,
+      "false": 4,
+      "rate_true": 96.2,
+      "n": 106
+    },
+    "structure.has_conclusion": {
+      "true": 102,
+      "false": 4,
+      "rate_true": 96.2,
+      "n": 106
+    },
+    "intro.has_contrib_list": {
+      "true": 47,
+      "false": 59,
+      "rate_true": 44.3,
+      "n": 106
+    },
+    "citations.venue_share_corpus": {
+      "other": 31.9,
+      "CV_conf": 25.7,
+      "preprint": 19.6,
+      "journal": 15.2,
+      "ML_conf": 7.5
+    },
+    "citations.CV_conf_perpaper_median": 23.0,
+    "citations.ML_conf_perpaper_median": 1.5
+  },
+  "domains_present": [
+    "3D",
+    "VL",
+    "efficiency",
+    "generation",
+    "medical",
+    "other",
+    "security",
+    "segdet",
+    "video"
+  ]
+}
