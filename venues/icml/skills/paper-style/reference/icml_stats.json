@@ -1,0 +1,366 @@
+{
+  "n_papers": 303,
+  "venue": "ICML 2026 spotlight",
+  "fields": {
+    "abstract.sentences": {
+      "quantiles": {
+        "median": 7,
+        "p25": 6,
+        "p75": 8,
+        "n": 297
+      },
+      "per_domain_median": {
+        "probabilistic": 7,
+        "science_apps": 7.0,
+        "general_ml": 7.0,
+        "rl": 7.0,
+        "theory": 7,
+        "llm": 8,
+        "social": 8,
+        "optimization": 7.5,
+        "generative": 8,
+        "vision": 7.0
+      },
+      "domain_sensitive": false
+    },
+    "abstract.words": {
+      "quantiles": {
+        "median": 161,
+        "p25": 144,
+        "p75": 185,
+        "n": 297
+      },
+      "per_domain_median": {
+        "probabilistic": 163,
+        "science_apps": 156.5,
+        "general_ml": 164.5,
+        "rl": 147.0,
+        "theory": 154,
+        "llm": 168,
+        "social": 169,
+        "optimization": 149.5,
+        "generative": 163,
+        "vision": 151.0
+      },
+      "domain_sensitive": false
+    },
+    "intro.paragraphs": {
+      "quantiles": {
+        "median": 9,
+        "p25": 7,
+        "p75": 12,
+        "n": 302
+      },
+      "per_domain_median": {
+        "probabilistic": 8,
+        "science_apps": 8,
+        "general_ml": 10,
+        "rl": 8.0,
+        "theory": 10,
+        "llm": 9.0,
+        "social": 9,
+        "optimization": 13.0,
+        "generative": 8.5,
+        "vision": 9
+      },
+      "domain_sensitive": false
+    },
+    "related.words": {
+      "quantiles": {
+        "median": 347,
+        "p25": 264,
+        "p75": 465,
+        "n": 247
+      },
+      "per_domain_median": {
+        "science_apps": 311.5,
+        "general_ml": 341.5,
+        "rl": 351.5,
+        "theory": 495.5,
+        "llm": 350.5,
+        "optimization": 389.0,
+        "generative": 375,
+        "vision": 315,
+        "social": 325,
+        "probabilistic": 577.0
+      },
+      "domain_sensitive": false
+    },
+    "method.equation_count": {
+      "quantiles": {
+        "median": 17,
+        "p25": 7,
+        "p75": 41,
+        "n": 302
+      },
+      "per_domain_median": {
+        "probabilistic": 39,
+        "science_apps": 16,
+        "general_ml": 13,
+        "rl": 21.5,
+        "theory": 66,
+        "llm": 8.5,
+        "social": 16,
+        "optimization": 38.0,
+        "generative": 25.5,
+        "vision": 10
+      },
+      "domain_sensitive": true
+    },
+    "method.figure_count": {
+      "quantiles": {
+        "median": 1,
+        "p25": 0,
+        "p75": 2,
+        "n": 302
+      },
+      "per_domain_median": {
+        "probabilistic": 1,
+        "science_apps": 2,
+        "general_ml": 1,
+        "rl": 1.0,
+        "theory": 1,
+        "llm": 1.0,
+        "social": 1,
+        "optimization": 1.5,
+        "generative": 1.0,
+        "vision": 1
+      },
+      "domain_sensitive": false
+    },
+    "experiments.table_count": {
+      "quantiles": {
+        "median": 5,
+        "p25": 2,
+        "p75": 10,
+        "n": 303
+      },
+      "per_domain_median": {
+        "probabilistic": 7,
+        "science_apps": 8,
+        "general_ml": 6.0,
+        "rl": 5.0,
+        "theory": 1,
+        "llm": 7.0,
+        "social": 8,
+        "optimization": 2.0,
+        "generative": 5.5,
+        "vision": 6
+      },
+      "domain_sensitive": true
+    },
+    "experiments.ablation_mentions": {
+      "quantiles": {
+        "median": 4,
+        "p25": 0,
+        "p75": 10,
+        "n": 303
+      },
+      "per_domain_median": {
+        "probabilistic": 1,
+        "science_apps": 7,
+        "general_ml": 1.0,
+        "rl": 6.5,
+        "theory": 0,
+        "llm": 6.0,
+        "social": 6,
+        "optimization": 0.0,
+        "generative": 7.0,
+        "vision": 7
+      },
+      "domain_sensitive": true
+    },
+    "experiments.sota_mentions": {
+      "quantiles": {
+        "median": 8,
+        "p25": 4,
+        "p75": 13,
+        "n": 303
+      },
+      "per_domain_median": {
+        "probabilistic": 8,
+        "science_apps": 11,
+        "general_ml": 8.5,
+        "rl": 7.0,
+        "theory": 4,
+        "llm": 9.0,
+        "social": 8,
+        "optimization": 3.5,
+        "generative": 8.0,
+        "vision": 9
+      },
+      "domain_sensitive": true
+    },
+    "claims.body_words": {
+      "quantiles": {
+        "median": 8818,
+        "p25": 6967,
+        "p75": 11202,
+        "n": 303
+      },
+      "per_domain_median": {
+        "probabilistic": 9883,
+        "science_apps": 7910,
+        "general_ml": 9017.5,
+        "rl": 8708.5,
+        "theory": 10997,
+        "llm": 8429.0,
+        "social": 11179,
+        "optimization": 8219.5,
+        "generative": 8596.5,
+        "vision": 5621
+      },
+      "domain_sensitive": false
+    },
+    "citations.total": {
+      "quantiles": {
+        "median": 60,
+        "p25": 46,
+        "p75": 83,
+        "n": 303
+      },
+      "per_domain_median": {
+        "probabilistic": 72,
+        "science_apps": 58,
+        "general_ml": 55.0,
+        "rl": 60.0,
+        "theory": 50,
+        "llm": 59.0,
+        "social": 63,
+        "optimization": 48.0,
+        "generative": 72.0,
+        "vision": 55
+      },
+      "domain_sensitive": false
+    },
+    "intro.hook_type": {
+      "distribution": {
+        "claim": [
+          296,
+          97.7
+        ],
+        "statistic": [
+          3,
+          1.0
+        ],
+        "question": [
+          3,
+          1.0
+        ],
+        "null": [
+          1,
+          0.3
+        ]
+      }
+    },
+    "abstract.opening_verb": {
+      "distribution": {
+        "propose": [
+          80,
+          26.4
+        ],
+        "introduce": [
+          75,
+          24.8
+        ],
+        "null": [
+          39,
+          12.9
+        ],
+        "present": [
+          23,
+          7.6
+        ],
+        "study": [
+          23,
+          7.6
+        ],
+        "show": [
+          21,
+          6.9
+        ],
+        "investigate": [
+          9,
+          3.0
+        ],
+        "develop": [
+          8,
+          2.6
+        ],
+        "address": [
+          8,
+          2.6
+        ],
+        "demonstrate": [
+          6,
+          2.0
+        ],
+        "formulate": [
+          4,
+          1.3
+        ],
+        "design": [
+          3,
+          1.0
+        ],
+        "explore": [
+          2,
+          0.7
+        ],
+        "build": [
+          1,
+          0.3
+        ],
+        "leverage": [
+          1,
+          0.3
+        ]
+      }
+    },
+    "structure.has_ablation_heading": {
+      "true": 131,
+      "false": 172,
+      "rate_true": 43.2,
+      "n": 303
+    },
+    "structure.has_related": {
+      "true": 247,
+      "false": 56,
+      "rate_true": 81.5,
+      "n": 303
+    },
+    "structure.has_conclusion": {
+      "true": 260,
+      "false": 43,
+      "rate_true": 85.8,
+      "n": 303
+    },
+    "intro.has_contrib_list": {
+      "true": 110,
+      "false": 193,
+      "rate_true": 36.3,
+      "n": 303
+    },
+    "citations.venue_share_corpus": {
+      "other": 41.3,
+      "ML_conf": 25.0,
+      "preprint": 19.2,
+      "journal": 11.7,
+      "CV_conf": 2.9
+    },
+    "citations.ML_conf_perpaper_median": 26.2,
+    "citations.CV_conf_perpaper_median": 0.0
+  },
+  "domains_present": [
+    "general_ml",
+    "generative",
+    "llm",
+    "optimization",
+    "probabilistic",
+    "rl",
+    "science_apps",
+    "social",
+    "theory",
+    "vision"
+  ]
+}
