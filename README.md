@@ -35,11 +35,12 @@ need to re-run it.
 |---|---|---|
 | **CVPR 2026** | 106 accepted oral papers (top ~2% of submissions) — LaTeX sources scraped from CVPR open access | Hand-authored, domain-neutral advisor questions |
 | **ICML 2026** | 303 accepted spotlight papers — LaTeX sources matched on arXiv (title + author surname verified) | **Review-derived**: mined from 2068 OpenReview reviews of 536 spotlights |
+| **ACL 2026** | 267 accepted oral papers — LaTeX sources matched on arXiv from the 478-paper oral list (title + author surname verified) | Hand-authored, domain-neutral advisor questions (ACL has no public reviews) |
 
-Each venue lives in its own directory (`venues/cvpr/`, `venues/icml/`) with two
-self-contained skills under `skills/paper-style/` and `skills/paper-critic/`.
-Adding a new venue (ICLR, NeurIPS, …) is a matter of copying the ICML pipeline
-and re-pointing the OpenReview invitation ID; see
+Each venue lives in its own directory (`venues/cvpr/`, `venues/icml/`,
+`venues/acl/`) with two self-contained skills under `skills/paper-style/` and
+`skills/paper-critic/`. Adding a new venue (ICLR, NeurIPS, EMNLP, …) is a matter
+of copying the closest existing pipeline and re-pointing the scraper; see
 [*Reproducing the corpus*](#reproducing-the-corpus).
 
 ## How to use
@@ -55,6 +56,8 @@ cp -r venues/cvpr/skills/paper-style    ~/.config/opencode/skills/paper-style-cv
 cp -r venues/cvpr/skills/paper-critic   ~/.config/opencode/skills/paper-critic-cvpr
 cp -r venues/icml/skills/paper-style    ~/.config/opencode/skills/paper-style-icml
 cp -r venues/icml/skills/paper-critic   ~/.config/opencode/skills/paper-critic-icml
+cp -r venues/acl/skills/paper-style     ~/.config/opencode/skills/paper-style-acl
+cp -r venues/acl/skills/paper-critic    ~/.config/opencode/skills/paper-critic-acl
 ```
 
 > The skill `name:` field in each `SKILL.md` is `paper-style` / `paper-critic`.
@@ -92,29 +95,30 @@ fine — the scripts handle missing sections gracefully.
 
 ## Key findings
 
-### Style facts — CVPR vs ICML
+### Style facts — CVPR vs ICML vs ACL
 
 Numbers below are corpus **medians** with the interquartile band `[P25–P75]`,
 computed by `aggregate.py` over each venue's feature set. The runtime
 `paper-style` skill compares your draft to exactly these numbers.
 
-| Field | CVPR 2026 (n=106) | ICML 2026 (n=303) |
-|---|---|---|
-| Abstract — sentences | 8 [7–9] | 7 [6–8] |
-| Abstract — words | 169 [148–194] | 161 [144–185] |
-| Intro — paragraphs | 8 [7–11] | 9 [7–12] |
-| Related work — words | 393 [333–497] | 347 [264–465] |
-| Method — equations | 11 [6–16] | 17 [7–41] |
-| Method — figures | 2 [1–3] | 1 [0–2] |
-| Experiments — tables | 4 [2–7] | 5 [2–10] |
-| Experiments — ablation mentions | 7 [2–11] | 4 [0–10] |
-| Experiments — SOTA mentions | 10 [7–17] | 8 [4–13] |
-| Body — words | 5,282 [4,246–6,445] | 8,818 [6,967–11,202] |
-| Citations — total | 77 [56–98] | 60 [46–83] |
-| Has explicit Related Work section | 96% | 82% |
-| Has explicit Ablation heading | 66% | 43% |
-| Has Conclusion section | 96% | 86% |
-| Has a contribution list in intro | 44% | 36% |
+| Field | CVPR 2026 (n=106) | ICML 2026 (n=303) | ACL 2026 (n=267) |
+|---|---|---|---|
+| Abstract — sentences | 8 [7–9] | 7 [6–8] | 7 [6–8] |
+| Abstract — words | 169 [148–194] | 161 [144–185] | 157 [140–178] |
+| Intro — paragraphs | 8 [7–11] | 9 [7–12] | 8 [7–11] |
+| Related work — words | 393 [333–497] | 347 [264–465] | 298 [223–416] |
+| Method — equations | 11 [6–16] | 17 [7–41] | 4 [0–8] |
+| Method — figures | 2 [1–3] | 1 [0–2] | 1 [0–2] |
+| Experiments — tables | 4 [2–7] | 5 [2–10] | 8 [4–12] |
+| Experiments — ablation mentions | 7 [2–11] | 4 [0–10] | 4 [0–10] |
+| Experiments — SOTA mentions | 10 [7–17] | 8 [4–13] | 9 [4–14] |
+| Body — words | 5,282 [4,246–6,445] | 8,818 [6,967–11,202] | 6,269 [5,128–7,936] |
+| Citations — total | 77 [56–98] | 60 [46–83] | 52 [41–68] |
+| Has explicit Related Work section | 96% | 82% | 91% |
+| Has explicit Ablation heading | 66% | 43% | 44% |
+| Has Conclusion section | 96% | 86% | 97% |
+| Has a contribution list in intro | 44% | 36% | 41% |
+| Anchor-venue cite share (per-paper median) | CV-family 23% | ML-family 26% | NLP-family 8% |
 
 A few patterns jump out:
 
@@ -128,18 +132,30 @@ A few patterns jump out:
   Work section as a *question*, not a defect, for ICML.
 - **Ablation practice differs sharply.** 66% of CVPR orals have an explicit
   ablation heading (median 7 ablation mentions); only 43% of ICML spotlights
-  do (median 4). ICML reviewers more often ask for ablations in review than
-  they find them in the paper — the #3 review pattern at ICML is "missing /
-  incomplete ablation study" (3% of reviews).
+  and 44% of ACL orals do (median 4 each). ICML reviewers more often ask for
+  ablations in review than they find them in the paper — the #3 review pattern
+  at ICML is "missing / incomplete ablation study" (3% of reviews). ACL papers
+  typically isolate design choices under an "Analysis" heading instead; the
+  ACL `inspect.py` checks for *both* Ablation and Analysis headings so an
+  Analysis-led paper is not falsely flagged.
+- **ACL methods are equation-light and table-heavy.** ACL methods carry a
+  median of just 4 equation environments (vs CVPR 11, ICML 17) — many ACL
+  methods are prompt-based or pipeline-based, and parsing papers have *zero*.
+  But ACL experiments show a median of 8 tables (vs CVPR 4, ICML 5). The
+  `paper-style` skill marks `method.equation_count` domain-sensitive and
+  flags table counts >12 or <4 as worth justifying.
 - **Citation venue mix is a strong venue-anchoring signal.** CVPR papers cite
   vision-family venues (CVPR/ICCV/ECCV) at a per-paper median of **23%**; ICML
   papers cite ML-family venues (ICML/ICLR/NeurIPS/COLT/AISTATS/AAAI/IJCAI/KDD/
   UAI/…) at a per-paper median of **26%** — and cite vision venues at a median
-  of **0%**. If your draft's anchor-venue share is in single digits, the
-  `paper-style` skill flags it as possible "style drift toward the wrong
-  community".
+  of **0%**. ACL papers cite NLP-family venues (ACL/EMNLP/NAACL/COLING/TACL/
+  Findings) at a per-paper median of just **8%** — *lower than expected*
+  because modern ACL papers lean heavily on arXiv preprints (~32%) and ML
+  conferences (~20%). A draft with NLP-family share near 0 is flagged as
+  possible "style drift toward ML conferences" — but a 2-3% share is normal,
+  not a defect.
 
-### Per-domain equations (ICML only)
+### Per-domain equations (ICML)
 
 ICML is broad enough that one median doesn't fit all sub-fields. The
 extractor tags each paper to one of 10 domain buckets (from OpenReview's
@@ -163,6 +179,28 @@ count is the clearest example:
 The `paper-style` skill uses per-domain medians for `domain-sensitive` fields
 (abstract length, equations, body words) so a theory paper with 60 equations
 isn't flagged against the LLM-bucket median of 8.5.
+
+### Per-domain equations (ACL)
+
+ACL has no OpenReview `primary_area` so domain tagging is keyword-only over
+title+abstract, mapped to 10 NLP-appropriate buckets inspired by ACL's official
+submission tracks. The keyword tagger is noisier than ICML's area-based path
+(~67% of papers land in `llm_reasoning`), so per-domain medians are best read
+as directional, not authoritative. Equation count again shows the clearest
+domain spread:
+
+| Domain | Equations (median) | n |
+|---|---|---|
+| efficiency | 8 | 5 |
+| other | 6.5 | 22 |
+| generation | 4 | 36 |
+| llm_reasoning | 3 | 180 |
+| multimodal | 2 | 11 |
+| parsing_linguistic | 0 | 7 |
+
+A parsing paper with 0 equations is normal; an efficiency paper with 0 is a
+question. The skill flags `method.equation_count` as domain-sensitive and
+prompts for a domain justification rather than a global-median violation.
 
 ### Review-derived critic patterns (ICML only)
 
@@ -191,8 +229,11 @@ same regex dictionary so the critic can quote the exact suspicious sentence
 ("you say 'outperforms all baselines' but never name a baseline by citation —
 reviewers raised 'weak baselines' in 3% of ICML reviews").
 
-CVPR's critic uses a hand-authored domain-neutral `critique_checklist.md`
-instead — there was no public review corpus to mine for CVPR.
+CVPR and ACL have no public review corpus (CVPR has no open reviews; ACL doesn't
+publish on OpenReview), so those two critics use a hand-authored domain-neutral
+`critique_checklist.md` instead. The ACL checklist is NLP-tuned (LLM-era
+baselines, prompt-template disclosure, annotation protocols for resource
+papers, analysis-vs-ablation heading tolerance).
 
 ## Project structure
 
@@ -207,15 +248,22 @@ main/
 │   │   └── skills/
 │   │       ├── paper-style/       ← SKILL.md + scripts/analyze.py + reference/
 │   │       └── paper-critic/      ← SKILL.md + scripts/inspect.py + reference/
-│   └── icml/                      ← ICML 2026 pipeline (complete)
-│       ├── scrape_papers.py       ← OpenReview spotlight metadata
-│       ├── match_arxiv.py         ← match papers to arXiv (title + authors)
-│       ├── download_sources.py    ← pull arXiv LaTeX tarballs
-│       ├── scrape_reviews.py      ← OpenReview reviews/rebuttals/decisions
-│       ├── extract.py             ← per-paper feature extractor (+ domain tagging)
-│       ├── mine_reviews.py        ← mine reviewer complaint patterns
-│       ├── aggregate.py           ← fold features + patterns → skill reference files
-│       ├── .env                  ← OpenReview EMAIL/PASSWORD (gitignored, NOT committed)
+│   ├── icml/                      ← ICML 2026 pipeline (complete)
+│   │   ├── scrape_papers.py       ← OpenReview spotlight metadata
+│   │   ├── match_arxiv.py         ← match papers to arXiv (title + authors)
+│   │   ├── download_sources.py    ← pull arXiv LaTeX tarballs
+│   │   ├── scrape_reviews.py      ← OpenReview reviews/rebuttals/decisions
+│   │   ├── extract.py             ← per-paper feature extractor (+ domain tagging)
+│   │   ├── mine_reviews.py        ← mine reviewer complaint patterns
+│   │   ├── aggregate.py           ← fold features + patterns → skill reference files
+│   │   ├── .env                  ← OpenReview EMAIL/PASSWORD (gitignored, NOT committed)
+│   │   └── skills/
+│   │       ├── paper-style/       ← SKILL.md + scripts/analyze.py + reference/
+│   │       └── paper-critic/      ← SKILL.md + scripts/inspect.py + reference/
+│   └── acl/                       ← ACL 2026 pipeline (complete)
+│       ├── scrape_arxiv.py        ← match 478 oral papers to arXiv + download tarballs (one shot)
+│       ├── extract.py             ← per-paper feature extractor (NLP venues, balanced-brace bib scanner)
+│       ├── aggregate.py           ← fold features → skill reference files
 │       └── skills/
 │           ├── paper-style/       ← SKILL.md + scripts/analyze.py + reference/
 │           └── paper-critic/      ← SKILL.md + scripts/inspect.py + reference/
@@ -239,7 +287,7 @@ skills/paper-critic/
 │   └── inspect.py                 ← runtime: extract sections + critique signals
 └── reference/
     ├── <venue>_expectations.md    ← compact corpus medians for the critic
-    ├── critique_checklist.md      ← CVPR only: hand-authored advisor questions
+    ├── critique_checklist.md      ← CVPR & ACL: hand-authored advisor questions
     └── review_patterns.md         ← ICML only: mined reviewer complaint patterns
 ```
 
@@ -321,31 +369,70 @@ script. It writes `icml_stats.json`, `icml_style.md` (paper-style) and
 > so the scrapers are mostly batched. Expect `scrape_reviews.py` to take a
 > few minutes.
 >
-> **arXiv matching.** `match_arxiv.py` uses strict normalized-title matching
-> plus an author-surname confirmation; 303/536 (56.5%) of spotlights matched.
-> The unmatched papers are mostly OpenReview-only submissions without an
-> arXiv preprint — that's expected. Only the 303 matched papers contribute
-> LaTeX sources to the corpus.
+> **arXiv matching.** `match_arxiv.py` uses strict normalized-title
+> matching plus an author-surname confirmation; 303/536 (56.5%) of
+> spotlights matched. The unmatched papers are mostly OpenReview-only
+> submissions without an arXiv preprint — that's expected. Only the 303
+> matched papers contribute LaTeX sources to the corpus.
+
+### ACL 2026 pipeline
+
+ACL has no OpenReview (no public reviews either), so the pipeline is the
+simplest of the three: one script matches the venue's oral paper list to
+arXiv and downloads LaTeX tarballs, then the same extract/aggregate flow. No
+review mining step. Python stdlib only — no extra deps.
+
+```bash
+cd venues/acl
+# 1. Match 478 oral papers to arXiv + download tarballs  → data/arxiv_matches.json, data/<arxiv_id>/  (267 matched, ~3.2 MB)
+python scrape_arxiv.py
+# 2. Extract per-paper features                          → features/*.json  (267 features)
+python extract.py
+# 3. Aggregate features → skills/*/reference/
+python aggregate.py        # writes acl_stats.json, acl_style.md, acl_expectations.md
+```
+
+ACL's `critique_checklist.md` (hand-authored, NLP-tuned) is committed
+directly — no build step.
+
+> **arXiv matching (ACL).** `scrape_arxiv.py` uses the same strict
+> normalized-title equality + author-surname confirmation as ICML's
+> `match_arxiv.py`. 267/478 (55.9%) of ACL orals matched — the unmatched
+> ones are venue-only submissions without an arXiv preprint; that's
+> expected for ACL (a sizeable fraction of NLP work, especially resources /
+> Dataset papers, doesn't go through arXiv).
+>
+> **Large bundled bibtex (ACL).** A handful of ACL LaTeX tarballs bundle
+> the entire 30–46 MB ACL Anthology `*.bib` file. `extract.py` uses a
+> balanced-brace walker instead of the lazy-regex scanner from CVPR/ICML
+> (which catastrophically backtracks on those files) and skips `*.bib`
+> files >5 MB so they don't pollute per-paper venue distributions.
 
 ### Adding a new venue
 
-The ICML pipeline is the template for any OpenReview-based conference. To port
-to, say, ICLR 2026:
+The pipeline you start from depends on what the venue publishes:
 
-1. Edit the invitation ID in `scrape_papers.py` and `scrape_reviews.py`
-   (search for `ICML` / `2026`).
-2. Repoint `AREA_TO_DOMAIN` in `extract.py` if ICLR uses different
-   `primary_area` strings — or drop domain tagging if the venue doesn't tag
-   areas at all.
-3. Re-run steps 1–7 above; rename output files (`iclr_stats.json`,
-   `iclr_style.md`, `iclr_expectations.md`, …) by passing the venue arg or
-   editing the few hardcoded strings in `aggregate.py` / `mine_reviews.py`.
-4. Edit the two `SKILL.md` frontmatter strings (name + description) so
-   opencode triggers off ICLR wording instead of ICML.
-
-For a venue with an open-access proceedings page but no OpenReview (like
-CVPR/ICCV/ECCV), start from the CVPR pipeline instead — `scrape_orals.py` is
-the template.
+- **OpenReview-based venue with public reviews** (ICLR, NeurIPS, …) → start
+  from the **ICML** pipeline. Edit the invitation ID in `scrape_papers.py`
+  and `scrape_reviews.py` (search for `ICML` / `2026`); repoint
+  `AREA_TO_DOMAIN` in `extract.py` if the venue uses different
+  `primary_area` strings (or drop domain tagging if it doesn't tag areas);
+  re-run the 7 ICML steps; rename output files (`iclr_stats.json`,
+  `iclr_style.md`, `iclr_expectations.md`, `review_patterns.md`, …) by
+  editing the few hardcoded strings in `aggregate.py` / `mine_reviews.py`;
+  edit the two `SKILL.md` frontmatter strings (name + description) so
+  opencode triggers off the new venue's wording.
+- **Open-access proceedings page, no OpenReview** (ICCV, ECCV, WACV, …) →
+  start from the **CVPR** pipeline. Rewrite `scrape_orals.py` to hit the
+  venue's proceedings page; re-run the 3 CVPR steps.
+- **arXiv-only matching (no OpenReview, no open-access proceedings)** (EMNLP,
+  NAACL, COLING if they don't expose per-paper LaTeX at the time of building)
+  → start from the **ACL** pipeline, which is the leanest of the three:
+  `scrape_arxiv.py` does match+download in one shot, no extra deps. Edit the
+  oral paper list input and the arXiv search helper, then run the 3 ACL
+  steps. The ACL `extract.py` also has the most robust bibtex scanner
+  (balanced-brace walker + >5 MB skip) — copy that file wholesale rather
+  than CVPR/ICML's older regex scanner.
 
 ## Design decisions
 
@@ -365,21 +452,46 @@ A few worth knowing about, since they shape what the skills do (and don't):
   computes per-domain medians for fields where the domain drives the value
   (equations, abstract length, body words). The runtime report prints a
   `domain-sensitive-deviation` status that asks the author to justify against
-  their sub-field's median rather than the global one. ICML has 10 buckets;
-  CVPR is small enough (n=106 orals) that we use global medians only.
+  their sub-field's median rather than the global one. ICML has 10 buckets
+  driven by OpenReview `primary_area`; ACL has 10 NLP-appropriate buckets
+  driven by a keyword classifier over title+abstract (noisier — a ceiling we
+  note, upgrade to embeddings if granularity matters); CVPR is small enough
+  (n=106 orals) that we use global medians only.
 - **Partial-draft tolerance.** Grad students write papers one section at a
   time. The extractor handles missing sections gracefully (reports `MISSING`
   rather than crashing), and the critic frames missing sections as "not yet
   written" rather than "you forgot".
-- **Review-derived, not hand-authored, critic checklist (ICML).** OpenReview
-  lets you read the actual reviews for ICML 2026 — so why guess what reviewers
-  care about? `mine_reviews.py` finds the recurring complaint patterns and
-  attaches anonymized verbatim reviewer quotes; the critic speaks in
-  reviewers' actual voice. Reviewer names are stripped at scrape time and
-  never enter any reference file.
+- **Review-derived, not hand-authored, critic checklist (ICML only).**
+  OpenReview lets you read the actual reviews for ICML 2026 — so why guess
+  what reviewers care about? `mine_reviews.py` finds the recurring complaint
+  patterns and attaches anonymized verbatim reviewer quotes; the critic
+  speaks in reviewers' actual voice. Reviewer names are stripped at scrape
+  time and never enter any reference file. CVPR and ACL have no public
+  review corpus, so those critics fall back to a hand-authored domain-neutral
+  `critique_checklist.md`; the ACL one is NLP-tuned (LLM-era baselines,
+  prompt-template disclosure, annotation protocols, analysis/ablation-heading
+  tolerance — ACL papers often fold design-choice isolation into an
+  "Analysis" section, which `inspect.py` checks separately from "Ablation").
 - **No predicted rating.** The ICML critic stays qualitative — it does not
   attempt to predict a reviewer score. The signal is "here are the gaps
   reviewers at this venue typically flag", not "you'd get a 4".
+- **Citation-venue signature, used heuristically.** The extractor classifies
+  each bib entry into a venue family (CV / ML / NLP / preprint / journal /
+  other) and the aggregator reports both the corpus-aggregate share and the
+  per-paper anchor-venue median (23% CV at CVPR, 26% ML at ICML, 8% NLP at
+  ACL). The `paper-style` skill flags a draft whose anchor-venue share is in
+  single digits as *possible* "style drift toward the wrong community" — but
+  explicitly as a heuristic: modern ACL papers legitimately cite <10%
+  NLP-family venues (arXiv + ML conferences dominate), so a low NLP share is
+  a question, not a defect.
+- **Balanced-brace bibtex scanner (ACL).** A couple of ACL tarballs bundle
+  the entire 30–46 MB ACL Anthology `*.bib`. The CVPR/ICML extractor's
+  lazy-`.*?\n}` regex catastrophically backtracks on those; the ACL
+  `extract.py` replaces it with a single-pass brace-walking entry iterator
+  (O(n), 46 MB in ~2 s) and skips `*.bib` files >5 MB so they don't pollute
+  per-paper venue distributions — the bundled anthology is not that paper's
+  own reference list. The same scanner is the recommended starting point for
+  any future venue pipeline.
 - **Lazy / stdlib-first.** Per the `ponytail` skill philosophy, the runtime
   scripts use only the Python standard library — no `pip install` needed to
   *use* the skills. Third-party deps (`openreview-py`, `python-dotenv`) are

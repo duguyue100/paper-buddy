@@ -1,0 +1,316 @@
+{
+  "n_papers": 267,
+  "fields": {
+    "abstract.sentences": {
+      "quantiles": {
+        "median": 7,
+        "p25": 6,
+        "p75": 8,
+        "n": 267
+      },
+      "per_domain_median": {
+        "generation": 7.0,
+        "llm_reasoning": 7.0,
+        "other": 7.0,
+        "multimodal": 8,
+        "parsing_linguistic": 7,
+        "efficiency": 7
+      },
+      "domain_sensitive": false
+    },
+    "abstract.words": {
+      "quantiles": {
+        "median": 157,
+        "p25": 140,
+        "p75": 178,
+        "n": 267
+      },
+      "per_domain_median": {
+        "generation": 166.5,
+        "llm_reasoning": 157.5,
+        "other": 148.5,
+        "multimodal": 175,
+        "parsing_linguistic": 142,
+        "efficiency": 136
+      },
+      "domain_sensitive": false
+    },
+    "intro.paragraphs": {
+      "quantiles": {
+        "median": 8,
+        "p25": 7,
+        "p75": 11,
+        "n": 266
+      },
+      "per_domain_median": {
+        "generation": 9.0,
+        "llm_reasoning": 8,
+        "other": 7.5,
+        "multimodal": 9,
+        "parsing_linguistic": 11,
+        "efficiency": 12
+      },
+      "domain_sensitive": false
+    },
+    "related.words": {
+      "quantiles": {
+        "median": 298,
+        "p25": 223,
+        "p75": 416,
+        "n": 243
+      },
+      "per_domain_median": {
+        "generation": 268,
+        "llm_reasoning": 300,
+        "other": 308,
+        "multimodal": 281.5,
+        "parsing_linguistic": 341
+      },
+      "domain_sensitive": false
+    },
+    "method.equation_count": {
+      "quantiles": {
+        "median": 4,
+        "p25": 0,
+        "p75": 8,
+        "n": 266
+      },
+      "per_domain_median": {
+        "generation": 4.0,
+        "llm_reasoning": 3,
+        "other": 6.5,
+        "multimodal": 2,
+        "parsing_linguistic": 0,
+        "efficiency": 8
+      },
+      "domain_sensitive": true
+    },
+    "method.figure_count": {
+      "quantiles": {
+        "median": 1,
+        "p25": 0,
+        "p75": 2,
+        "n": 266
+      },
+      "per_domain_median": {
+        "generation": 1.0,
+        "llm_reasoning": 1,
+        "other": 1.0,
+        "multimodal": 1,
+        "parsing_linguistic": 1,
+        "efficiency": 1
+      },
+      "domain_sensitive": false
+    },
+    "experiments.table_count": {
+      "quantiles": {
+        "median": 8,
+        "p25": 4,
+        "p75": 12,
+        "n": 267
+      },
+      "per_domain_median": {
+        "generation": 9.0,
+        "llm_reasoning": 7.0,
+        "other": 9.5,
+        "multimodal": 10,
+        "parsing_linguistic": 4,
+        "efficiency": 13
+      },
+      "domain_sensitive": true
+    },
+    "experiments.ablation_mentions": {
+      "quantiles": {
+        "median": 4,
+        "p25": 0,
+        "p75": 10,
+        "n": 267
+      },
+      "per_domain_median": {
+        "generation": 5.0,
+        "llm_reasoning": 4.0,
+        "other": 1.5,
+        "multimodal": 3,
+        "parsing_linguistic": 1,
+        "efficiency": 1
+      },
+      "domain_sensitive": false
+    },
+    "experiments.sota_mentions": {
+      "quantiles": {
+        "median": 9,
+        "p25": 4,
+        "p75": 14,
+        "n": 267
+      },
+      "per_domain_median": {
+        "generation": 10.0,
+        "llm_reasoning": 9.0,
+        "other": 8.0,
+        "multimodal": 9,
+        "parsing_linguistic": 3,
+        "efficiency": 4
+      },
+      "domain_sensitive": true
+    },
+    "claims.body_words": {
+      "quantiles": {
+        "median": 6269,
+        "p25": 5128,
+        "p75": 7936,
+        "n": 267
+      },
+      "per_domain_median": {
+        "generation": 6934.5,
+        "llm_reasoning": 6173.5,
+        "other": 6700.5,
+        "multimodal": 7015,
+        "parsing_linguistic": 6173,
+        "efficiency": 6508
+      },
+      "domain_sensitive": false
+    },
+    "citations.total": {
+      "quantiles": {
+        "median": 52,
+        "p25": 41,
+        "p75": 68,
+        "n": 267
+      },
+      "per_domain_median": {
+        "generation": 57.5,
+        "llm_reasoning": 50.0,
+        "other": 49.0,
+        "multimodal": 48,
+        "parsing_linguistic": 54,
+        "efficiency": 88
+      },
+      "domain_sensitive": false
+    },
+    "intro.hook_type": {
+      "distribution": {
+        "claim": [
+          262,
+          98.1
+        ],
+        "question": [
+          2,
+          0.7
+        ],
+        "statistic": [
+          2,
+          0.7
+        ],
+        "null": [
+          1,
+          0.4
+        ]
+      }
+    },
+    "abstract.opening_verb": {
+      "distribution": {
+        "propose": [
+          102,
+          38.2
+        ],
+        "introduce": [
+          66,
+          24.7
+        ],
+        "present": [
+          29,
+          10.9
+        ],
+        "null": [
+          25,
+          9.4
+        ],
+        "study": [
+          8,
+          3.0
+        ],
+        "investigate": [
+          7,
+          2.6
+        ],
+        "explore": [
+          6,
+          2.2
+        ],
+        "address": [
+          5,
+          1.9
+        ],
+        "demonstrate": [
+          5,
+          1.9
+        ],
+        "show": [
+          4,
+          1.5
+        ],
+        "tackle": [
+          4,
+          1.5
+        ],
+        "develop": [
+          3,
+          1.1
+        ],
+        "leverage": [
+          2,
+          0.7
+        ],
+        "design": [
+          1,
+          0.4
+        ]
+      }
+    },
+    "structure.has_ablation_heading": {
+      "true": 118,
+      "false": 149,
+      "rate_true": 44.2,
+      "n": 267
+    },
+    "structure.has_related": {
+      "true": 243,
+      "false": 24,
+      "rate_true": 91.0,
+      "n": 267
+    },
+    "structure.has_conclusion": {
+      "true": 258,
+      "false": 9,
+      "rate_true": 96.6,
+      "n": 267
+    },
+    "intro.has_contrib_list": {
+      "true": 109,
+      "false": 158,
+      "rate_true": 40.8,
+      "n": 267
+    },
+    "citations.venue_share_corpus": {
+      "preprint": 31.5,
+      "other": 20.4,
+      "ML_conf": 19.4,
+      "journal": 16.4,
+      "NLP_conf": 9.9,
+      "CV_conf": 2.3
+    },
+    "citations.NLP_conf_perpaper_median": 8.3,
+    "citations.ML_conf_perpaper_median": 19.5
+  },
+  "domains_present": [
+    "efficiency",
+    "generation",
+    "ie_classification",
+    "interpretability",
+    "llm_reasoning",
+    "multimodal",
+    "other",
+    "parsing_linguistic",
+    "qa"
+  ]
+}
